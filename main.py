@@ -377,15 +377,15 @@ for position in driver_results_sprint_3:
 
 # Output Table
 league_results = {"Driver": [driver_names[0], driver_names[1], driver_names[2]],
-                  "Points": [total_points_driver_1, total_points_driver_2, total_points_driver_3],
                   "Wins": [wins_driver_1, wins_driver_2, wins_driver_3],
                   "Podiums": [podiums_driver_1, podiums_driver_2, podiums_driver_3],
                   "Poles": [poles_driver_1, poles_driver_2, poles_driver_3],
-                  "Fastest Laps": [fastest_laps_driver_1, fastest_laps_driver_2, fastest_laps_driver_3]}
+                  "Fastest Laps": [fastest_laps_driver_1, fastest_laps_driver_2, fastest_laps_driver_3],
+                  "Points": [total_points_driver_1, total_points_driver_2, total_points_driver_3]}
 
 
 def output_data_to_table():
-    df = pd.DataFrame(league_results, columns=["Driver", "Points", "Wins", "Podiums", "Poles", "Fastest Laps"])
+    df = pd.DataFrame(league_results, columns=["Driver", "Wins", "Podiums", "Poles", "Fastest Laps", "Points"])
     # Sort output table by ascending order
     df = df.sort_values(["Points"], ascending=[0])
     try:
