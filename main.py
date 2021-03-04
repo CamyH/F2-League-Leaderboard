@@ -1,4 +1,4 @@
-# Cameron Hunt 12/10/2020
+# Cameron Hunt 22/02/2021
 # F1 2020 F2 League
 # The purpose of this python script is to keep track of how well me and my two friends do in our Formula 2 league
 # Requires two text files as data sources
