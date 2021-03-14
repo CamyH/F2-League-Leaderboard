@@ -274,6 +274,11 @@ def output():
 
     # Sort output table by ascending order
     df = df.sort_values(["Points"], ascending=[0])
+    # Reset Index after sorting
+    df = df.reset_index(drop=True)
+    # Increment each index by 1 so that index starts from 1 instead of 0
+    df.index += 1
+
     try:
         df.to_csv('results.csv')
         print("Results file successfully created!")
