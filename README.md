@@ -1,4 +1,9 @@
 # F2 League Leaderboard
-## This Python program was created by myself in order for me and my two friends to keep track of how many points we have earned throughout our F2 League within the F1 2020 official game.
-### It outputs the results to a .csv file and includes information such as how many wins and pole positions each driver has
-#### Requires Python 3.6 or later
+### This Python program was created by myself in order for me and my three friends to keep track of the following things throughout our F2 League within the F1 2020 official game:
+* Our total points
+* How many wins of each type we have
+* How many pole positions each of us have
+* How many fastest laps each of us have
+
+#### It outputs the results table to a .csv file which is ordered in descending points order 
+##### Requires Python 3.6 or later
