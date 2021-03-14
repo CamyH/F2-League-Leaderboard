@@ -272,7 +272,7 @@ race_results = {"Driver": [driver1.driver_name, driver2.driver_name, driver3.dri
 def output():
     df = pd.DataFrame(league_results, columns=["Driver", "FR Wins", "SR Wins", "Podiums", "Poles", "FLaps", "Points"])
 
-    # Sort output table by ascending order
+    # Sort output table in descending order
     df = df.sort_values(["Points"], ascending=[0])
     # Reset Index after sorting
     df = df.reset_index(drop=True)
