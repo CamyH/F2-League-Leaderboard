@@ -1,6 +1,9 @@
 Spielberg Cameron p1 pole fl
-Spielberg Yossi p2 
-Spielberg Carter p3
-Silverstone Cameron p3 pole 
-Silverstone Yossi p2 pole fl
+Spielberg Yossi p3
+Spielberg Carter p5
+Spielberg McKenzie p2
+Silverstone Cameron p4
+Silverstone Yossi p3 fl
+Silverstone Carter p1 pole
+Silverstone McKenzie p2
 eof
