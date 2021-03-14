@@ -1,4 +1,4 @@
-# Cameron Hunt 22/02/2021
+# Cameron Hunt 14/03/2021
 # F1 2020 F2 League
 # The purpose of this python script is to keep track of how well me and my two friends do in our Formula 2 league
 # Requires two text files as data sources
@@ -24,6 +24,12 @@ sprint_wins_driver_3 = 0
 podiums_driver_3 = 0
 poles_driver_3 = 0
 fastest_laps_driver_3 = 0
+# Driver 4
+feature_wins_driver_4 = 0
+sprint_wins_driver_4 = 0
+podiums_driver_4 = 0
+poles_driver_4 = 0
+fastest_laps_driver_4 = 0
 # Race Data
 feature_race_data = []
 sprint_race_data = []
@@ -41,29 +47,28 @@ season_results_driver2 = []
 score_driver_feature_3 = 0
 score_driver_sprint_3 = 0
 season_results_driver3 = []
+# Driver 4
+score_driver_feature_4 = 0
+score_driver_sprint_4 = 0
+season_results_driver4 = []
 
 
 class Driver:
 
     def __init__(self):
-        # self.name = name
         self.feature_race = feature_race_data
-        # for word in feature_race_data:
-        #   print(word)
 
     def input_feature_race_data(self):
         file = open("feature_races_results.txt", "r")
         for line in file:
             for word in line.split():
                 feature_race_data.append(word)
-                # print(word)
 
     def input_sprint_race_data(self):
         file = open("sprint_races_results.txt", "r")
         for line in file:
             for word in line.split():
                 sprint_race_data.append(word)
-                # print(word)
 
     def calculate_feature_race_points(self, name, driver_score, driver_poles, driver_fastest_laps,
                                       driver_results_feature):
@@ -80,7 +85,11 @@ class Driver:
                 if feature_race_data[idx + 2] == "pole":
                     self.driver_score_feature = self.driver_score_feature + 4
                     self.driver_poles_feature = self.driver_poles_feature + 1
-                if feature_race_data[idx + 3] == "fl":
+                if feature_race_data[idx + 2] == "pole":
+                    if feature_race_data[idx + 3] == "fl":
+                        self.driver_score_feature = self.driver_score_feature + 2
+                        self.driver_fastest_laps_feature = self.driver_fastest_laps_feature + 1
+                if feature_race_data[idx + 2] == "fl":
                     self.driver_score_feature = self.driver_score_feature + 2
                     self.driver_fastest_laps_feature = self.driver_fastest_laps_feature + 1
                 if position == "p1":
@@ -160,18 +169,10 @@ class Driver:
                     self.driver_results_sprint.append(position)
 
 
-# numOfDrivers = 5
-
-# a = Driver()
-# b = Driver()
-# "a={a}, b={b}, a+b={c}".format(a=a, b=b, c=a+b)
-
-# for i in range(0, numOfDrivers):
-#    'driver{0}'.format(i) = Driver()
-
 driver1 = Driver()
 driver2 = Driver()
 driver3 = Driver()
+driver4 = Driver()
 
 # Feature Races
 driver1.calculate_feature_race_points("Cameron", 0, 0, 0, [])
@@ -181,6 +182,9 @@ driver2.calculate_feature_race_points("Yossi", 0, 0, 0, [])
 for i in range(0, len(feature_race_data)):
     del feature_race_data[0]
 driver3.calculate_feature_race_points("Carter", 0, 0, 0, [])
+for i in range(0, len(feature_race_data)):
+    del feature_race_data[0]
+driver4.calculate_feature_race_points("McKenzie", 0, 0, 0, [])
 
 # Sprint Races
 driver1.calculate_sprint_race_points("Cameron", 0, 0, [])
@@ -192,19 +196,23 @@ for i in range(0, len(sprint_race_data)):
 driver3.calculate_sprint_race_points("Carter", 0, 0, [])
 for i in range(0, len(sprint_race_data)):
     del sprint_race_data[0]
+driver4.calculate_sprint_race_points("McKenzie", 0, 0, [])
 
 # Add both results arrays together for all drivers and store in new array driver1_results
 driver1_results = (*driver1.driver_results_feature, *driver1.driver_results_sprint)
 driver2_results = (*driver2.driver_results_feature, *driver2.driver_results_sprint)
 driver3_results = (*driver3.driver_results_feature, *driver3.driver_results_sprint)
+driver4_results = (*driver4.driver_results_feature, *driver4.driver_results_sprint)
 # Get fastest laps for each driver
 fastest_laps_driver_1 = driver1.driver_fastest_laps_feature + driver1.driver_fastest_laps_sprint
 fastest_laps_driver_2 = driver2.driver_fastest_laps_feature + driver2.driver_fastest_laps_sprint
 fastest_laps_driver_3 = driver3.driver_fastest_laps_feature + driver3.driver_fastest_laps_sprint
+fastest_laps_driver_4 = driver4.driver_fastest_laps_feature + driver4.driver_fastest_laps_sprint
 # Get total points for each driver
 total_points_driver_1 = driver1.driver_score_feature + driver1.driver_score_sprint
 total_points_driver_2 = driver2.driver_score_feature + driver2.driver_score_sprint
 total_points_driver_3 = driver3.driver_score_feature + driver3.driver_score_sprint
+total_points_driver_4 = driver4.driver_score_feature + driver4.driver_score_sprint
 
 # Calculating total number of podiums & wins achieved
 for position in driver1_results:
@@ -231,32 +239,41 @@ for position in driver3_results:
     if position == "p1s" or position == "p1f" or position == "p2" or position == "p3":
         podiums_driver_3 = podiums_driver_3 + 1
 
+for position in driver4_results:
+    if position == "p1s":
+        sprint_wins_driver_4 = sprint_wins_driver_4 + 1
+    elif position == "p1f":
+        feature_wins_driver_4 = feature_wins_driver_4 + 1
+    if position == "p1s" or position == "p1f" or position == "p2" or position == "p3":
+        podiums_driver_4 = podiums_driver_4 + 1
+
 # Output Table
 # FR = Feature Race
 # SR = Sprint Race
-league_results = {"Driver": [driver1.driver_name, driver2.driver_name, driver3.driver_name],
-                  "FR Wins": [feature_wins_driver_1, feature_wins_driver_2, feature_wins_driver_3],
-                  "SR Wins": [sprint_wins_driver_1, sprint_wins_driver_2, sprint_wins_driver_3],
-                  "Podiums": [podiums_driver_1, podiums_driver_2, podiums_driver_3],
-                  "Poles": [driver1.driver_poles_feature, driver2.driver_poles_feature, driver3.driver_poles_feature],
-                  "FLaps": [fastest_laps_driver_1, fastest_laps_driver_2, fastest_laps_driver_3],
-                  "Points": [total_points_driver_1, total_points_driver_2, total_points_driver_3]}
+league_results = {"Driver": [driver1.driver_name, driver2.driver_name, driver3.driver_name, driver4.driver_name],
+                  "FR Wins": [feature_wins_driver_1, feature_wins_driver_2, feature_wins_driver_3,
+                              feature_wins_driver_4],
+                  "SR Wins": [sprint_wins_driver_1, sprint_wins_driver_2, sprint_wins_driver_3, sprint_wins_driver_4],
+                  "Podiums": [podiums_driver_1, podiums_driver_2, podiums_driver_3, podiums_driver_4],
+                  "Poles": [driver1.driver_poles_feature, driver2.driver_poles_feature, driver3.driver_poles_feature,
+                            driver4.driver_poles_feature],
+                  "FLaps": [fastest_laps_driver_1, fastest_laps_driver_2, fastest_laps_driver_3, fastest_laps_driver_4],
+                  "Points": [total_points_driver_1, total_points_driver_2, total_points_driver_3,
+                             total_points_driver_4]}
 
 race_results = {"Driver": [driver1.driver_name, driver2.driver_name, driver3.driver_name],
-                "Feature Race Results": [driver1.driver_results_feature, driver2.driver_score_feature, driver3.driver_score_feature],
-                "Sprint Race Results": [driver1.driver_results_sprint, driver2.driver_results_sprint, driver3.driver_results_sprint]}
+                "Feature Race Results": [driver1.driver_results_feature, driver2.driver_score_feature,
+                                         driver3.driver_score_feature],
+                "Sprint Race Results": [driver1.driver_results_sprint, driver2.driver_results_sprint,
+                                        driver3.driver_results_sprint]}
+
 
 # Output function
 def output():
     df = pd.DataFrame(league_results, columns=["Driver", "FR Wins", "SR Wins", "Podiums", "Poles", "FLaps", "Points"])
-    driver_results_output = pd.DataFrame(race_results, columns=["Driver", "Feature Race Results", "Sprint Race Results"])
-    #driver2_results_output = pd.DataFrame(driver2_results, columns=["Race Results for "][driver2_name])
-    #driver3_results_output = pd.DataFrame(driver3_results, columns=["Race Results for "][driver3_name])
 
     # Sort output table by ascending order
     df = df.sort_values(["Points"], ascending=[0])
-    #print(driver2_results_output)
-    #print(driver3_results_output)
     try:
         df.to_csv('results.csv')
         print("Results file successfully created!")
