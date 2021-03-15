@@ -5,5 +5,7 @@
 * How many pole positions each of us have
 * How many fastest laps each of us have
 
+### We have modified one rule and that is no matter what position you finish in, if you have the fastest lap, you are still awarded the 2 extra points.
+
 #### It outputs the results table to a .csv file which is ordered in descending points order 
 ##### Requires Python 3.6 or later
