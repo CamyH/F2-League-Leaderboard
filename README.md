@@ -3,6 +3,7 @@
 * Our total points
 * How many wins of each type we have
 * How many pole positions each of us have
+* How many podiums each of us have
 * How many fastest laps each of us have
 
 ### We have modified one rule and that is no matter what position you finish in, if you have the fastest lap, you are still awarded the 2 extra points.
