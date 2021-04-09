@@ -79,6 +79,8 @@ class Driver:
         self.driver_poles_feature = driver_poles
         self.driver_fastest_laps_feature = driver_fastest_laps
         self.driver_results_feature = driver_results_feature
+        # Loop through all feature race results and work out points from each position
+        # Pole positions and fastest laps award points in feature races only.
         for idx in range(0, len(feature_race_data)):
             if feature_race_data[idx] == self.driver_name:
                 position = feature_race_data[idx + 1]
@@ -94,6 +96,7 @@ class Driver:
                     self.driver_fastest_laps_feature = self.driver_fastest_laps_feature + 1
                 if position == "p1":
                     self.driver_score_feature = self.driver_score_feature + 25
+                    # Add an 'f' to the end of the position to signify a sprint race win
                     position_feature = position + "f"
                     self.driver_results_feature.append(position_feature)
                 elif position == "p2":
@@ -134,6 +137,8 @@ class Driver:
         self.driver_score_sprint = driver_score
         self.driver_fastest_laps_sprint = driver_fastest_laps
         self.driver_results_sprint = driver_results_sprint
+        # Loop through all sprint race results and work out points from each position
+        # Only fastest laps give extra points in sprint races
         for idx in range(0, len(sprint_race_data)):
             if sprint_race_data[idx] == self.driver_name:
                 position = sprint_race_data[idx + 1]
@@ -142,6 +147,7 @@ class Driver:
                     self.driver_fastest_laps_sprint = self.driver_fastest_laps_sprint + 1
                 if position == "p1":
                     self.driver_score_sprint = self.driver_score_sprint + 15
+                    # Add an 's' to the end of the position to signify a sprint race win
                     position_sprint = position + "s"
                     self.driver_results_sprint.append(position_sprint)
                 elif position == "p2":
@@ -176,6 +182,7 @@ driver4 = Driver()
 
 # Feature Races
 driver1.calculate_feature_race_points("Cameron", 0, 0, 0, [])
+# Remove any duplication of data
 for i in range(0, len(feature_race_data)):
     del feature_race_data[0]
 driver2.calculate_feature_race_points("Yossi", 0, 0, 0, [])
@@ -188,6 +195,7 @@ driver4.calculate_feature_race_points("McKenzie", 0, 0, 0, [])
 
 # Sprint Races
 driver1.calculate_sprint_race_points("Cameron", 0, 0, [])
+# Remove any duplication of data
 for i in range(0, len(sprint_race_data)):
     del sprint_race_data[0]
 driver2.calculate_sprint_race_points("Yossi", 0, 0, [])
@@ -260,13 +268,6 @@ league_results = {"Driver": [driver1.driver_name, driver2.driver_name, driver3.d
                   "FLaps": [fastest_laps_driver_1, fastest_laps_driver_2, fastest_laps_driver_3, fastest_laps_driver_4],
                   "Points": [total_points_driver_1, total_points_driver_2, total_points_driver_3,
                              total_points_driver_4]}
-
-race_results = {"Driver": [driver1.driver_name, driver2.driver_name, driver3.driver_name],
-                "Feature Race Results": [driver1.driver_results_feature, driver2.driver_score_feature,
-                                         driver3.driver_score_feature],
-                "Sprint Race Results": [driver1.driver_results_sprint, driver2.driver_results_sprint,
-                                        driver3.driver_results_sprint]}
-
 
 # Output function
 def output():
