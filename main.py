@@ -53,27 +53,29 @@ score_driver_sprint_4 = 0
 season_results_driver4 = []
 
 
-class Driver:
+def input_feature_race_data():
+    file = open("feature_races_results.txt", "r")
+    for line in file:
+        for word in line.split():
+            feature_race_data.append(word)
 
+
+def input_sprint_race_data():
+    file = open("sprint_races_results.txt", "r")
+    for line in file:
+        for word in line.split():
+            sprint_race_data.append(word)
+
+
+class Driver:
+    """ This is a driver class """
     def __init__(self):
         self.feature_race = feature_race_data
-
-    def input_feature_race_data(self):
-        file = open("feature_races_results.txt", "r")
-        for line in file:
-            for word in line.split():
-                feature_race_data.append(word)
-
-    def input_sprint_race_data(self):
-        file = open("sprint_races_results.txt", "r")
-        for line in file:
-            for word in line.split():
-                sprint_race_data.append(word)
 
     def calculate_feature_race_points(self, name, driver_score, driver_poles, driver_fastest_laps,
                                       driver_results_feature):
         driver = Driver()
-        driver.input_feature_race_data()
+        input_feature_race_data()
         self.driver_name = name
         self.driver_score_feature = driver_score
         self.driver_poles_feature = driver_poles
@@ -132,7 +134,7 @@ class Driver:
     def calculate_sprint_race_points(self, name, driver_score, driver_fastest_laps,
                                      driver_results_sprint):
         driver = Driver()
-        driver.input_sprint_race_data()
+        input_sprint_race_data()
         self.driver_name = name
         self.driver_score_sprint = driver_score
         self.driver_fastest_laps_sprint = driver_fastest_laps
