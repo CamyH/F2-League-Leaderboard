@@ -1,0 +1,6 @@
+*When done, ensure filename is "feature_races_results" saved as a .txt file
+*Pole and FL are not required
+* eof must not be deleted
+<track name> <driver name> <finishing position> <pole> <fl>
+eof
+
